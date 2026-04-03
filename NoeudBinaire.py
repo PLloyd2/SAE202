@@ -3,6 +3,8 @@ class NoeudBinaire():
         self.v=v
         self.set_gauche(g) 
         self.set_droit(d)
+
+        
     def __str__(self, h=0):
         "Affichage de l'arbre binaire de manière structurée"
         if h == 0:#le début

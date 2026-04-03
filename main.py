@@ -1,4 +1,4 @@
-from arbreBinaire import *
+from NoeudBinaire import *
 from NoeudHuffman import *
 
 def comptage(txt):

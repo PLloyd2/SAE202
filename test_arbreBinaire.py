@@ -1,4 +1,4 @@
-from arbreBinaire import *
+from NoeudBinaire import *
 def test_NoeudBinaire():
     g = NoeudBinaire('G', None, None)
     f = NoeudBinaire('F', g, None)
