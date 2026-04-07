@@ -38,6 +38,19 @@ class NoeudHuffman(NoeudBinaire):
         return resultat
     
     @staticmethod
+    def decompression(texte_comprime, dic_encodage):
+        resultat=""
+        temp=""
+        for bin in texte_comprime:
+            temp+=bin
+            for cle in dic_encodage:
+                if dic_encodage[cle] == temp:
+                    resultat+=cle[0]
+                    temp=""
+                    break
+        return resultat
+    
+    @staticmethod
     def tri_noeuds(liste_noeud):
         """Trie une liste d'objets NoeudHuffman par ordre décroissant de poids."""
         for i in range(len(liste_noeud)):
