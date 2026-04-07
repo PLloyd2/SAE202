@@ -41,14 +41,16 @@ class NoeudHuffman(NoeudBinaire):
     def decompression(texte_comprime, dic_encodage):
         resultat=""
         temp=""
+        nb=0
         for bin in texte_comprime:
             temp+=bin
+            nb+=1
             for cle in dic_encodage:
                 if dic_encodage[cle] == temp:
                     resultat+=cle[0]
                     temp=""
                     break
-        return resultat
+        return resultat, nb
     
     @staticmethod
     def tri_noeuds(liste_noeud):

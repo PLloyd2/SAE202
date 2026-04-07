@@ -1,3 +1,4 @@
+from unidecode import unidecode
 from NoeudBinaire import *
 from NoeudHuffman import *
 
@@ -43,4 +44,9 @@ text2="bonjour"
 com1=t3.compression(text2, dic_huffman1)
 print(com1)
 print(t3.decompression(com1, dic_huffman1))
+
+print(unidecode("bonéjour"))
+
+
+
 
