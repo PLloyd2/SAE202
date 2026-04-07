@@ -26,19 +26,30 @@ def tri_tab(tab):
         tab[i]=maxi[0]
     return tab
 
-    
+def code_complete():
+    #Demande de la saisie du texte à compresser
+    texte_a_compresse = str(input("Insérer le texte à compression :\n"))
 
-t1= comptage("Line 13 : def deplace(self, dx: Any, dy: Any, dz: Any) -> AnyLine 13 : Number of parameters was 3 in Point2D.deplace and is now 4 in overriding 'Point3D.deplace' methodIt looks like the method has a different number of arguments than in the implemented interface or in an overridden method. Extra arguments with default values are ignored.Point2D.pyLine 11 : Redefining name 'p2' from outer scope (line 56)It looks like the local variable is hiding a global variable with the same name.Most likely there is nothing wrong with this. I just wanted to remind you that you can't access the global variable like this. If you knew it then please ignore the warning.If you don't want to see this reminder in the future, then add redefined-outer-name (without quotes) into Tools → Options → Assistant → Disabled checks.Line 29 : Redefining name 'p2' from outer scope (line 56)It looks like the local variable is hiding a global variable with the same name.Most likely there is nothing wrong with this. I just wanted to remind you that you can't access the global variable like this. If you knew it then please ignore the warning.If you don't want to see this reminder in the future, then add redefined-outer-name")
-t2=dic_to_tab(t1)
-tri_tab(t2)
-tri_tab(t2)
-arbre = NoeudHuffman.construction_arbre(t2)
-print(arbre)
-print(arbre.encodage_huffman())
-print()
-t3=NoeudHuffman.construction_arbre(tri_tab(dic_to_tab(comptage("bonjour"))))
-print(t3)
-print(t3.encodage_huffman())
+    #On calcule la table des effectifs du texte
+    table_effectif = comptage(texte_a_compresse)
 
+    #On transforme la table en liste de tuples pour pouvoir lancer la construction de l'arbre
+    dictionnaire = tri_tab(dic_to_tab(table_effectif))
 
+    #Construction de l'arbre de Huffman
+    arbre_Huffman_racine = NoeudHuffman.construction_arbre(dictionnaire)
+
+    #Calcul de la table d'encodage
+    table_encodage = arbre_Huffman_racine.encodage_huffman()
+
+    #Traduction du texte à l'aide de la table des encodages
+    texte_a_renvoyer =  NoeudHuffman.compression(texte_a_compresse,table_encodage)
+
+    #Affichage du texte traduit
+    print(texte_a_renvoyer)
+
+    return texte_a_renvoyer
+
+if __name__ == "__main__":
+    code_complete()
 
