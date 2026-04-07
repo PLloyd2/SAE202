@@ -1,5 +1,6 @@
 from NoeudBinaire import *
 from NoeudHuffman import *
+import time
 
 def comptage(txt):
     dic={}
@@ -27,11 +28,15 @@ def tri_tab(tab):
     return tab
 
 def code_complete():
+
     #Demande de la saisie du texte à compresser
-    texte_a_compresse = str(input("Insérer le texte à compression :\n"))
+    texte = str(input("Insérer le texte à compression :\n"))
+
+    #début du programme de compression
+    debut = time.time()
 
     #On calcule la table des effectifs du texte
-    table_effectif = comptage(texte_a_compresse)
+    table_effectif = comptage(texte)
 
     #On transforme la table en liste de tuples pour pouvoir lancer la construction de l'arbre
     dictionnaire = tri_tab(dic_to_tab(table_effectif))
@@ -43,13 +48,27 @@ def code_complete():
     table_encodage = arbre_Huffman_racine.encodage_huffman()
 
     #Traduction du texte à l'aide de la table des encodages
-    texte_a_renvoyer =  NoeudHuffman.compression(texte_a_compresse,table_encodage)
+    texte_compresse =  NoeudHuffman.compression(texte,table_encodage)
+
+    #fin du programme de compression
+    fin = time.time()
+    temps_execution = round(fin-debut,4) #temps d'exécution du programme de compression (hors calcul de la mémoire)
+
+    #Taille des texte
+    taille_avant_compression = len(texte)*8
+    taille_apres_compression = len(texte_compresse)
+
+    taux_compression = round(taille_apres_compression/taille_avant_compression, 2)
 
     #Affichage du texte traduit
-    print(texte_a_renvoyer)
+    print("\nTexte compressé :")
+    print(texte_compresse)
 
-    return texte_a_renvoyer
+    #Affichage des données utiles
+    print("\nTaille du texte avant la compression : ", taille_avant_compression, "bits")
+    print("Taille du texte après la compression : ", taille_apres_compression, "bits")
+    print("Taux de compression : ", taux_compression)
+    print("Temps d'éxécution du programme de compression",temps_execution,"secondes")
 
 if __name__ == "__main__":
     code_complete()
-
