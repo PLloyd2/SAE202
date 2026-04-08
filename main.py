@@ -1,6 +1,7 @@
 from NoeudBinaire import *
 from NoeudHuffman import *
 import time
+from unidecode import unidecode
 
 def comptage(txt):
     dic={}
@@ -30,7 +31,7 @@ def tri_tab(tab):
 def code_complete():
 
     #Demande de la saisie du texte à compresser
-    texte = str(input("Insérer le texte à compression :\n"))
+    texte = unidecode(str(input("Insérer le texte à compression :\n")))
 
     #début du programme de compression
     debut = time.time()
@@ -55,7 +56,11 @@ def code_complete():
     temps_execution = round(fin-debut,4) #temps d'exécution du programme de compression (hors calcul de la mémoire)
 
     #Taille des texte
-    taille_avant_compression = len(texte)*8
+    texte_binaire = ""
+    for c in texte:
+        texte_binaire += NoeudHuffman.ascii_vers_base2(c)
+
+    taille_avant_compression = len(texte_binaire)
     taille_apres_compression = len(texte_compresse)
 
     taux_compression = round(taille_apres_compression/taille_avant_compression, 2)
@@ -67,7 +72,7 @@ def code_complete():
     #Affichage des données utiles
     print("\nTaille du texte avant la compression : ", taille_avant_compression, "bits")
     print("Taille du texte après la compression : ", taille_apres_compression, "bits")
-    print("Taux de compression : ", taux_compression)
+    print("Taux de compression : ", taux_compression*100, "%")
     print("Temps d'éxécution du programme de compression",temps_execution,"secondes")
 
 if __name__ == "__main__":
