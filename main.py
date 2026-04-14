@@ -85,8 +85,8 @@ def code_complete():
             taux_compression = round(taille_apres_compression/taille_avant_compression, 2)
 
             #Affichage du texte traduit
-            print("\nTexte compressé :")
-            print(texte_compresse)
+            #print("\nTexte compressé :")
+            #print(texte_compresse)
 
             #Affichage des données utiles
             print("\nTaille du texte avant la compression : ", taille_avant_compression, "bits")
@@ -100,5 +100,7 @@ def code_complete():
                 print("Test de décompression : SUCCÈS ")
             else:
                 print("Test de décompression : ÉCHEC")
+
+            print("Compression OK.\n")
 if __name__ == "__main__":
     code_complete()
