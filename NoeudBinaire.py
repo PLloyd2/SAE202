@@ -104,12 +104,12 @@ class NoeudBinaire():
     def Largeur(self):
         """Retourne la liste des valeurs de l'arbre binaire selon un parcours en largeur"""
         tab=[]
-        file=[self]
-        while len(file)>0:
-            noeud= file.pop(0)
+        racine=[self]
+        while len(racine)>0:
+            noeud= racine.pop(0)
             tab.append(noeud.v)
             if noeud.g is not None:
-                file.append(noeud.g)
+                racine.append(noeud.g)
             if noeud.d is not None:
-                file.append(noeud.d)
+                racine.append(noeud.d)
         return tab

@@ -56,14 +56,15 @@ def code_complete():
             debut = time.time()
 
             #On calcule la table des effectifs du texte
-            table_effectif = comptage(texte)
+            dictionnaire_effectif = comptage(texte)
+            print(dictionnaire_effectif)
 
             #On transforme la table en liste de tuples pour pouvoir lancer la construction de l'arbre
-            dictionnaire = tri_tab(dic_to_tab(table_effectif))
+            table_effectif = tri_tab(dic_to_tab(dictionnaire_effectif))
 
             #Construction de l'arbre de Huffman
-            arbre_Huffman_racine = NoeudHuffman.construction_arbre(dictionnaire)
-            print("Construction de l'arbre OK.")
+            arbre_Huffman_racine = NoeudHuffman.construction_arbre(table_effectif)
+
             #Calcul de la table d'encodage
             table_encodage = arbre_Huffman_racine.encodage_huffman()
             
@@ -91,7 +92,7 @@ def code_complete():
             #Affichage des données utiles
             print("\nTaille du texte avant la compression : ", taille_avant_compression, "bits")
             print("Taille du texte après la compression : ", taille_apres_compression, "bits")
-            print("Taux de compression : ", taux_compression*100, "%")
+            print("Taux de compression : ", round(taux_compression*100,2), "%")
             print("Temps d'éxécution du programme de compression",temps_execution,"secondes")
             
             #preuve de la décompression
