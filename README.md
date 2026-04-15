@@ -1,38 +1,33 @@
-"# SAE202" 
-
-Ce projet vise à implémenter l'algorithme de Huffman, une méthode de compression de données sans perte.
-
-Le code permet :
-- Analyse de la fréquence de chaque caractère dans un texte donné et l'ajoute à un dictionnaire.
-- Utilisation d'une classe NoeudBinaire avec héritage pour gérer la classe huffman.
-- Construction de l'arbre avec un algorithme qui le crée en fonction du poids de chaque lettre.
-- Création de la table de correspondance caractère -> code binaire.
-- Affichage de l'arbre dans la console( __str__ ).
+SAÉ 2.02 - Compression de données par codage de Huffman
+Ce projet vise à implémenter l'algorithme de Huffman, une méthode de compression de données sans perte, en utilisant la programmation orientée objet en Python.
 
 
-Fonctionnalités implémentées :
-NoeudBinaire
-- Constructeurs, Getters, Setters.
-- Tests d'état, si un noeud a un fils droit/gauche s'il est une feuille ou vide.
-- Calcule la hauteur de l'arbre.
-- Parcours préfixe, infixe, suffixe et en largeur.
-- Affichage visuel de l'arbre.
-
-Arbre Huffman
-- Construction de l'arbre, algorithme itératif (construction_arbre) fusionnant les deux noeuds de poids minimal jusqu'a l'obtention de la racine finale.
-- Génération des codes uniques à l'aide d'un parcours récursif pour attribuer 0 à gauche et 1 à droite, générant ainsi le dictionnaire Huffman.
-- Compression permettant de transformer un texte en suite de 0 et de 1 à partir du dictionnaire généré.
+Structure du projet
+NoeudBinaire.py : Contient la classe de base pour la création et la gestion d'arbres binaires.
+NoeudHuffman.py : Contient la classe héritée gérant spécifiquement la logique de l'algorithme de Huffman.
+main.py : Script principal permettant de traiter en lot les fichiers textes à compresser.
+input/ : Dossier devant contenir les fichiers textes (.txt) à traiter.
+Fonctionnalités implémentées
 
 
-Fonctions externes
-comptage et tri d'une chaine de caractère.
+La classe NoeudBinaire
+Gestion de base : Constructeur, Getters, et Setters.
+Tests d'état : Vérification si un nœud a un fils droit/gauche, s'il est une feuille, ou s'il est un arbre vide.
+Métriques : Calcul récursif de la hauteur de l'arbre.
+Parcours d'arbre : Implémentation des parcours préfixe, infixe, suffixe et en largeur.
 
-Structure du projet: 
-- arbreBinaire.py contient la classe NoeudBinaire
-- NoeudHuffman.py contient la class NoeudHuffman
-- main.py script principal pour tester la compresion.
 
-Utilisation dans le terminal:
-python main.py
+La classe NoeudHuffman
+Construction de l'arbre : Algorithme itératif (construction_arbre) fusionnant les deux nœuds de poids minimal jusqu'à l'obtention de la racine finale.
+Génération des encodages : Parcours récursif pour attribuer 0 à la branche gauche et 1 à la branche droite, générant ainsi le dictionnaire de Huffman avec le code unique de chaque caractère.
+Compression : Transformation du texte en une suite de 0 et de 1 optimisée à partir du dictionnaire généré.
+Décompression : Algorithme permettant de reconstituer le texte d'origine.
+Utilitaires : Nettoyage des caractères spéciaux (via unidecode), comptage des occurrences, tri personnalisé des nœuds, et calcul des tailles (conversion ASCII vers base 2).
 
-Le terminal affichera l'arbre de Huffman généré visuellement suivi du dictionnaire contennat le nouvelle encodage de chaque lettre.
+
+Utilisation
+Placez vos fichiers textes (extension .txt) dans le dossier nommé input/ situé à la racine du projet.
+Ouvrez votre terminal et placez-vous dans le répertoire du projet.
+Lancez le script en passant le nom du dossier en argument :
+python main.py input/
+
