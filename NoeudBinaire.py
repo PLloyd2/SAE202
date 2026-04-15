@@ -69,7 +69,7 @@ class NoeudBinaire():
         else:
             hd=0
         return 1+max(hg,hd)
-    
+
     def prefixe(self):
         """Retourne la liste des valeurs de l'arbre binaire selon un parcours en préfixe"""
         tab=[]
