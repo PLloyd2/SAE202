@@ -37,6 +37,7 @@ class NoeudHuffman(NoeudBinaire):
                     break
         return resultat
     
+<<<<<<< HEAD
     @staticmethod
     def decompression(texte_comprime, dic_encodage):
         resultat=""
@@ -51,7 +52,29 @@ class NoeudHuffman(NoeudBinaire):
                     temp=""
                     break
         return resultat, nb
+=======
+    def decompression(self, texte_comprime):
+        """Décompresse un texte binaire en parcourant l'arbre de Huffman."""
+        resultat = ""
+        noeud_actuel = self
+        
+        for bit in texte_comprime:
+            if bit == '0':
+                noeud_actuel = noeud_actuel.get_g()
+            else:
+                noeud_actuel = noeud_actuel.get_d()
+                
+            if noeud_actuel.arbre_f():
+                resultat += noeud_actuel.get_v()[0]
+                noeud_actuel = self
+        return resultat
+>>>>>>> dev
     
+    @staticmethod
+    def ascii_vers_base2(c):
+        """Convertit un caractère ASCII en une chaîne de caractères représentant sa valeur en binaire sur 8 bits."""
+        return format(ord(c), '08b')
+
     @staticmethod
     def tri_noeuds(liste_noeud):
         """Trie une liste d'objets NoeudHuffman par ordre décroissant de poids."""

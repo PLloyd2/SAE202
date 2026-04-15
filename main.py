@@ -1,6 +1,13 @@
+<<<<<<< HEAD
+=======
+import sys
+import os
+import time
+>>>>>>> dev
 from unidecode import unidecode
 from NoeudBinaire import *
 from NoeudHuffman import *
+import time
 
 def comptage(txt):
     dic={}
@@ -27,26 +34,84 @@ def tri_tab(tab):
         tab[i]=maxi[0]
     return tab
 
-    
-text1="Line 13 : def deplace(self, dx: Any, dy: Any, dz: Any) -> AnyLine 13 : Number of parameters was 3 in Point2D.deplace and is now 4 in overriding 'Point3D.deplace' methodIt looks like the method has a different number of arguments than in the implemented interface or in an overridden method. Extra arguments with default values are ignored.Point2D.pyLine 11 : Redefining name 'p2' from outer scope (line 56)It looks like the local variable is hiding a global variable with the same name.Most likely there is nothing wrong with this. I just wanted to remind you that you can't access the global variable like this. If you knew it then please ignore the warning.If you don't want to see this reminder in the future, then add redefined-outer-name (without quotes) into Tools → Options → Assistant → Disabled checks.Line 29 : Redefining name 'p2' from outer scope (line 56)It looks like the local variable is hiding a global variable with the same name.Most likely there is nothing wrong with this. I just wanted to remind you that you can't access the global variable like this. If you knew it then please ignore the warning.If you don't want to see this reminder in the future, then add redefined-outer-name"
-t1= comptage(text1)
-t2=dic_to_tab(t1)
-tri_tab(t2)
-tri_tab(t2)
-arbre = NoeudHuffman.construction_arbre(t2)
-print(arbre)
-print(arbre.encodage_huffman())
-print()
-t3=NoeudHuffman.construction_arbre(tri_tab(dic_to_tab(comptage("bonjour"))))
-print(t3)
-dic_huffman1=t3.encodage_huffman()
-text2="bonjour"
-com1=t3.compression(text2, dic_huffman1)
-print(com1)
-print(t3.decompression(com1, dic_huffman1))
+def code_complete():
 
+<<<<<<< HEAD
 print(unidecode("bonéjour"))
 
 
 
 
+=======
+    if len(sys.argv) < 2:
+        print("Erreur : Spécifiez le dossier en paramètre (ex: python3 main.py input/)")
+        return
+
+    input_dir = sys.argv[1]
+
+    for f in os.listdir(input_dir):
+        if f.endswith('.txt'):
+            f_path = os.path.join(input_dir, f)
+            print(f"\nFichier {f_path} chargé.")
+
+            # Ouvrir et lire le fichier
+            with open(f_path, 'r', encoding='utf-8') as file:
+                contenu_brut = file.read()
+            
+            texte = unidecode(contenu_brut)
+            print("Encodage du texte en ASCII OK.")
+            print("Construction de l'arbre de Huffman. Compression du texte.")
+
+            #début du programme de compression
+            debut = time.time()
+
+            #On calcule la table des effectifs du texte
+            table_effectif = comptage(texte)
+
+            #On transforme la table en liste de tuples pour pouvoir lancer la construction de l'arbre
+            dictionnaire = tri_tab(dic_to_tab(table_effectif))
+
+            #Construction de l'arbre de Huffman
+            arbre_Huffman_racine = NoeudHuffman.construction_arbre(dictionnaire)
+            print("Construction de l'arbre OK.")
+            #Calcul de la table d'encodage
+            table_encodage = arbre_Huffman_racine.encodage_huffman()
+            
+            #Traduction du texte à l'aide de la table des encodages
+            texte_compresse =  NoeudHuffman.compression(texte,table_encodage)
+
+            #fin du programme de compression
+            fin = time.time()
+            temps_execution = round(fin-debut,4) #temps d'exécution du programme de compression (hors calcul de la mémoire)
+
+            #Taille des texte
+            texte_binaire = ""
+            for c in texte:
+                texte_binaire += NoeudHuffman.ascii_vers_base2(c)
+
+            taille_avant_compression = len(texte_binaire)
+            taille_apres_compression = len(texte_compresse)
+
+            taux_compression = round(taille_apres_compression/taille_avant_compression, 2)
+
+            #Affichage du texte traduit
+            #print("\nTexte compressé :")
+            #print(texte_compresse)
+
+            #Affichage des données utiles
+            print("\nTaille du texte avant la compression : ", taille_avant_compression, "bits")
+            print("Taille du texte après la compression : ", taille_apres_compression, "bits")
+            print("Taux de compression : ", taux_compression*100, "%")
+            print("Temps d'éxécution du programme de compression",temps_execution,"secondes")
+            
+            #preuve de la décompression
+            texte_decompresse = arbre_Huffman_racine.decompression(texte_compresse)
+            if texte == texte_decompresse:
+                print("Test de décompression : SUCCÈS ")
+            else:
+                print("Test de décompression : ÉCHEC")
+
+            print("Compression OK.\n")
+if __name__ == "__main__":
+    code_complete()
+>>>>>>> dev
